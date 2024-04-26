@@ -27,6 +27,14 @@ class TransactionSets:
 		data = TransactionSets.sort_columns(data)
 		return data
 
+	def to_summary_dataframe(self) -> pd.DataFrame:
+		data = pd.DataFrame()
+		for transaction_set in self:
+			data = pd.concat([data, transaction_set.to_summary_dataframe()])
+
+		data = TransactionSets.sort_columns(data)
+		return data
+
 	@staticmethod
 	def sort_columns(data: pd.DataFrame) -> pd.DataFrame:
 		substrings = ['adj', 'ref', 'rem']

@@ -56,3 +56,25 @@ def test_to_dataframe(
 	assert payment == all_data['paid_amount'].sum().round(2)
 
 	all_data.to_csv(f'{current_path}/output/all_samples.csv')
+
+def test_to_summary_dataframe(
+		blue_cross_nc_sample,
+		emedny_sample,
+		united_healthcare_legacy_sample,
+		all_samples,
+):
+	data = blue_cross_nc_sample.to_summary_dataframe()
+	assert data['payer_claim_control_number'].nunique() == blue_cross_nc_sample.count_claims()
+	# assert data['patient'].nunique() == blue_cross_nc_sample.count_patients()
+
+	data = emedny_sample.to_summary_dataframe()
+	assert data['payer_claim_control_number'].nunique() == emedny_sample.count_claims()
+	# assert data['patient'].nunique() == emedny_sample.count_patients()
+
+	data = united_healthcare_legacy_sample.to_summary_dataframe()
+	assert data['payer_claim_control_number'].nunique() == united_healthcare_legacy_sample.count_claims()
+	# assert data['patient'].nunique() == united_healthcare_legacy_sample.count_patients()
+
+	data = all_samples.to_summary_dataframe()
+	assert data['payer_claim_control_number'].nunique() == all_samples.count_claims()
+	# assert data['patient'].nunique() == all_samples.count_patients()

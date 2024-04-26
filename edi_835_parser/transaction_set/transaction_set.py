@@ -74,6 +74,41 @@ class TransactionSet:
 
 		return pd.DataFrame(data)
 
+	def to_summary_dataframe(self) -> pd.DataFrame:
+		"""flatten the remittance advice by claim to a pandas DataFrame"""
+		data = []
+		for claim in self.claims:
+			datum = {
+				'marker': claim.claim.marker,
+				'patient': claim.patient.name,
+				'payer': self.payer.organization.name,
+				'charge_amount': claim.claim.charge_amount,
+				'paid_amount': claim.claim.paid_amount,
+				'patient_responsibility_amount': claim.claim.patient_responsibility_amount,
+				# 'claim_filing_indicator_code': claim.claim_filing_indicator_code,
+				'payer_claim_control_number': claim.claim.payer_claim_control_number,
+				'payer_classification': str(claim.claim.status.payer_classification)
+			}
+
+			for service in claim.services:
+
+				for index, adjustment in enumerate(service.adjustments):
+					datum[f'adj_{index}_group'] = adjustment.group_code.code
+					datum[f'adj_{index}_code'] = adjustment.reason_code.code
+					datum[f'adj_{index}_amount'] = adjustment.amount
+
+				for index, reference in enumerate(service.references):
+					datum[f'ref_{index}_qual'] = reference.qualifier.code
+					datum[f'ref_{index}_value'] = reference.value
+
+				for index, remark in enumerate(service.remarks):
+					datum[f'rem_{index}_qual'] = remark.qualifier.code
+					datum[f'rem_{index}_code'] = remark.code.code
+
+			data.append(datum)
+
+		return pd.DataFrame(data)
+
 	@staticmethod
 	def serialize_service(
 			financial_information: FinancialInformationSegment,
