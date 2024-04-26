@@ -65,7 +65,7 @@ def test_to_summary_dataframe(
 ):
 	data = blue_cross_nc_sample.to_summary_dataframe()
 	assert data['payer_claim_control_number'].nunique() == blue_cross_nc_sample.count_claims()
-	# assert data['patient'].nunique() == blue_cross_nc_sample.count_patients()
+	assert data['patient'].nunique() == blue_cross_nc_sample.count_patients()
 
 	data = emedny_sample.to_summary_dataframe()
 	assert data['payer_claim_control_number'].nunique() == emedny_sample.count_claims()
