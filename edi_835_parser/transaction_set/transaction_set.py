@@ -9,6 +9,7 @@ from edi_835_parser.loops.organization import Organization as OrganizationLoop
 from edi_835_parser.segments.utilities import find_identifier
 from edi_835_parser.segments.interchange import Interchange as InterchangeSegment
 from edi_835_parser.segments.financial_information import FinancialInformation as FinancialInformationSegment
+from edi_835_parser.segments.reassociation_trace_number import ReassociationTraceNumber as ReassociationTraceNumberSegment
 
 BuildAttributeResponse = namedtuple('BuildAttributeResponse', 'key value segment segments')
 
@@ -19,12 +20,14 @@ class TransactionSet:
 			self,
 			interchange: InterchangeSegment,
 			financial_information: FinancialInformationSegment,
+			reassociation_trace_number: ReassociationTraceNumberSegment,
 			claims: List[ClaimLoop],
 			organizations: List[OrganizationLoop],
 			file_path: str,
 	):
 		self.interchange = interchange
 		self.financial_information = financial_information
+		self.reassociation_trace_number = reassociation_trace_number
 		self.claims = claims
 		self.organizations = organizations
 		self.file_path = file_path
@@ -52,6 +55,7 @@ class TransactionSet:
 
 				datum = TransactionSet.serialize_service(
 					self.financial_information,
+					self.reassociation_trace_number,
 					self.payer,
 					claim,
 					service
@@ -87,7 +91,8 @@ class TransactionSet:
 				'patient_responsibility_amount': claim.claim.patient_responsibility_amount,
 				# 'claim_filing_indicator_code': claim.claim_filing_indicator_code,
 				'payer_claim_control_number': claim.claim.payer_claim_control_number,
-				'payer_classification': str(claim.claim.status.payer_classification)
+				'payer_classification': str(claim.claim.status.payer_classification),
+				'check_number': self.reassociation_trace_number.check_number,
 			}
 
 			for service in claim.services:
@@ -112,6 +117,7 @@ class TransactionSet:
 	@staticmethod
 	def serialize_service(
 			financial_information: FinancialInformationSegment,
+			reassociation_trace_number: ReassociationTraceNumberSegment,
 			payer: OrganizationLoop,
 			claim: ClaimLoop,
 			service: ServiceLoop,
@@ -146,7 +152,8 @@ class TransactionSet:
 			'start_date': start_date,
 			'end_date': end_date,
 			'rendering_provider': claim.rendering_provider.name if claim.rendering_provider else None,
-			'payer_classification': str(claim.claim.status.payer_classification)
+			'payer_classification': str(claim.claim.status.payer_classification),
+			'check_number': reassociation_trace_number.check_number,
 		}
 
 		return datum
@@ -155,6 +162,7 @@ class TransactionSet:
 	def build(cls, file_path: str) -> 'TransactionSet':
 		interchange = None
 		financial_information = None
+		reassociation_trace_number = None
 		claims = []
 		organizations = []
 
@@ -182,13 +190,16 @@ class TransactionSet:
 			if response.key == 'financial information':
 				financial_information = response.value
 
+			if response.key == 'reassociation trace number':
+				reassociation_trace_number = response.value
+
 			if response.key == 'organization':
 				organizations.append(response.value)
 
 			if response.key == 'claim':
 				claims.append(response.value)
 
-		return TransactionSet(interchange, financial_information, claims, organizations, file_path)
+		return TransactionSet(interchange, financial_information, reassociation_trace_number, claims, organizations, file_path)
 
 	@classmethod
 	def build_attribute(cls, segment: Optional[str], segments: Iterator[str]) -> BuildAttributeResponse:
@@ -207,6 +218,10 @@ class TransactionSet:
 		if identifier == FinancialInformationSegment.identification:
 			financial_information = FinancialInformationSegment(segment)
 			return BuildAttributeResponse('financial information', financial_information, None, segments)
+
+		if identifier == ReassociationTraceNumberSegment.identification:
+			reassociation_trace_number = ReassociationTraceNumberSegment(segment)
+			return BuildAttributeResponse('reassociation trace number', reassociation_trace_number, None, segments)
 
 		if identifier == OrganizationLoop.initiating_identifier:
 			organization, segments, segment = OrganizationLoop.build(segment, segments)

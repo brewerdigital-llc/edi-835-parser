@@ -1,11 +1,11 @@
-,marker,patient,code,modifier,qualifier,allowed_units,billed_units,transaction_date,charge_amount,allowed_amount,paid_amount,payer,start_date,end_date,rendering_provider,payer_classification,adj_0_amount,adj_0_code,adj_0_group,rem_0_code,rem_0_qual
-0,PATIENT ACCOUNT NUMBER,Submitted First1 Submitted Last1,V2020,RB,HC,1,1,2010-01-01,6.0,6.0,6.0,NYSDOH,2010-01-01,2010-01-01,,primary,,,,,
-1,PATIENT ACCOUNT NUMBER,Submitted First1 Submitted Last1,V2700,RB,HC,1,1,2010-01-01,2.75,2.75,2.75,NYSDOH,2010-01-01,2010-01-01,,primary,,,,,
-2,PATIENT ACCOUNT NUMBER,Submitted First1 Submitted Last1,V2103,RB,HC,1,1,2010-01-01,5.5,5.5,5.5,NYSDOH,2010-01-01,2010-01-01,,primary,,,,,
-3,PATIENT ACCOUNT NUMBER,Submitted First1 Submitted Last1,S0580,,HC,2,2,2010-01-01,20.0,20.0,20.0,NYSDOH,2010-01-01,2010-01-01,,primary,,,,,
-4,PATIENT ACCOUNT NUMBER,Submitted First2 Submitted Last2,V2020,,HC,0,0,2010-01-01,12.0,,0.0,NYSDOH,2010-01-01,2010-01-01,,secondary,12.0,29,CO,,
-5,PATIENT ACCOUNT NUMBER,Submitted First2 Submitted Last2,V2103,,HC,0,0,2010-01-01,22.0,,0.0,NYSDOH,2010-01-01,2010-01-01,,secondary,22.0,29,CO,,
-6,PATIENT ACCOUNT NUMBER,Submitted First3 Submitted Last3,V2020,RB,HC,1,1,2010-01-01,6.0,6.0,6.0,NYSDOH,2010-01-01,2010-01-01,,secondary,,,,,
-7,PATIENT ACCOUNT NUMBER,Submitted First3 Submitted Last3,V2103,RB,HC,1,1,2010-01-01,5.5,5.5,5.5,NYSDOH,2013-09-17,2013-09-17,,secondary,,,,,
-8,PATIENT ACCOUNT NUMBER,Submitted First3 Submitted Last3,V2700,RB,HC,0,0,2010-01-01,2.75,,0.0,NYSDOH,2010-01-01,2010-01-01,,secondary,2.75,251,CO,N206,HE
-9,PATIENT ACCOUNT NUMBER,Submitted First3 Submitted Last3,S0580,,HC,0,0,2010-01-01,20.0,,0.0,NYSDOH,2010-01-01,2010-01-01,,secondary,20.0,251,CO,N206,HE
+,marker,patient,code,modifier,qualifier,allowed_units,billed_units,transaction_date,charge_amount,allowed_amount,paid_amount,payer,start_date,end_date,rendering_provider,payer_classification,check_number,adj_0_amount,adj_0_code,adj_0_group,rem_0_code,rem_0_qual
+0,PATIENT ACCOUNT NUMBER,Submitted First1 Submitted Last1,V2020,RB,HC,1,1,2010-01-01,6.0,6.0,6.0,NYSDOH,2010-01-01,2010-01-01,,primary,10100000000,,,,,
+1,PATIENT ACCOUNT NUMBER,Submitted First1 Submitted Last1,V2700,RB,HC,1,1,2010-01-01,2.75,2.75,2.75,NYSDOH,2010-01-01,2010-01-01,,primary,10100000000,,,,,
+2,PATIENT ACCOUNT NUMBER,Submitted First1 Submitted Last1,V2103,RB,HC,1,1,2010-01-01,5.5,5.5,5.5,NYSDOH,2010-01-01,2010-01-01,,primary,10100000000,,,,,
+3,PATIENT ACCOUNT NUMBER,Submitted First1 Submitted Last1,S0580,,HC,2,2,2010-01-01,20.0,20.0,20.0,NYSDOH,2010-01-01,2010-01-01,,primary,10100000000,,,,,
+4,PATIENT ACCOUNT NUMBER,Submitted First2 Submitted Last2,V2020,,HC,0,0,2010-01-01,12.0,,0.0,NYSDOH,2010-01-01,2010-01-01,,secondary,10100000000,12.0,29,CO,,
+5,PATIENT ACCOUNT NUMBER,Submitted First2 Submitted Last2,V2103,,HC,0,0,2010-01-01,22.0,,0.0,NYSDOH,2010-01-01,2010-01-01,,secondary,10100000000,22.0,29,CO,,
+6,PATIENT ACCOUNT NUMBER,Submitted First3 Submitted Last3,V2020,RB,HC,1,1,2010-01-01,6.0,6.0,6.0,NYSDOH,2010-01-01,2010-01-01,,secondary,10100000000,,,,,
+7,PATIENT ACCOUNT NUMBER,Submitted First3 Submitted Last3,V2103,RB,HC,1,1,2010-01-01,5.5,5.5,5.5,NYSDOH,2013-09-17,2013-09-17,,secondary,10100000000,,,,,
+8,PATIENT ACCOUNT NUMBER,Submitted First3 Submitted Last3,V2700,RB,HC,0,0,2010-01-01,2.75,,0.0,NYSDOH,2010-01-01,2010-01-01,,secondary,10100000000,2.75,251,CO,N206,HE
+9,PATIENT ACCOUNT NUMBER,Submitted First3 Submitted Last3,S0580,,HC,0,0,2010-01-01,20.0,,0.0,NYSDOH,2010-01-01,2010-01-01,,secondary,10100000000,20.0,251,CO,N206,HE
