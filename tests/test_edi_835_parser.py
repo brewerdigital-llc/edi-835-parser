@@ -69,12 +69,12 @@ def test_to_summary_dataframe(
 
 	data = emedny_sample.to_summary_dataframe()
 	assert data['payer_claim_control_number'].nunique() == emedny_sample.count_claims()
-	# assert data['patient'].nunique() == emedny_sample.count_patients()
+	assert data['patient'].nunique() == emedny_sample.count_patients()
 
 	data = united_healthcare_legacy_sample.to_summary_dataframe()
 	assert data['payer_claim_control_number'].nunique() == united_healthcare_legacy_sample.count_claims()
-	# assert data['patient'].nunique() == united_healthcare_legacy_sample.count_patients()
+	assert data['patient'].nunique() == united_healthcare_legacy_sample.count_patients()
 
 	data = all_samples.to_summary_dataframe()
 	assert data['payer_claim_control_number'].nunique() == all_samples.count_claims()
-	# assert data['patient'].nunique() == all_samples.count_patients()
+	assert data['patient'].nunique() == all_samples.count_patients()
